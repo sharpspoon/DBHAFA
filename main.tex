@@ -5,6 +5,7 @@
 \usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{comment}
 
 \graphicspath{ {./images/} }
 
@@ -32,14 +33,7 @@ Email: rcw0024@auburn.edu\\
 %-------------------------------------------------------------------------------
 \begin{abstract}
 %-------------------------------------------------------------------------------
-When given a finite resource such as the space on planet Earth, and add a rapidly growing population (there is approximately a net gain of one new person on the planet Earth every 31 seconds\footnote{\url{https://www.census.gov/popclock}}), there will become a growing need to group the growing number of devices in a much faster method. This is where adding the DBSCAN method into HAFA~\cite{10.1145/3229710.3229740} would greatly reduce the overall average case run time. 
-
-
-Figure~\ref{fig:backup} for the location of the new button.
-
-\begin{verbatim}
-put psuedocode here
-\end{verbatim}
+When given a finite resource such as the space on planet Earth, and add a rapidly increasing population (there is approximately a net gain of one new person on the planet Earth every 31 seconds\footnote{\url{https://www.census.gov/popclock}}), there will become a need to group the growing number of devices within HAFA~\cite{10.1145/3229710.3229740} in a much faster method. This is where adding the DBSCAN method into HAFA as an initial pass would greatly reduce the overall average case run time.
 
 \end{abstract}
 
@@ -48,20 +42,43 @@ put psuedocode here
 \section{Introduction}
 %-------------------------------------------------------------------------------
 
-In the following sections, many areas will be covered such as the new features added to the VCG tool, the importance of them, some of the code%
-\footnote{VCG uses Visual Basic .NET} that was required to implement them as well as future improvements. In addition to explaining the new additions that were added to the VCG tool, each following section will include a subsection that will also contain possible improvements and/or advancements that could be added on top of what has already been done. These additions, though may seem small, should prove to be a worthy addition to the VCG tool. It is also recommended that the reader download%
-\footnote{\url{https://sourceforge.net/projects/visualcodegrepp}} and install the VCG tool and become familiar with all of its features. A list of other similar tools as well as the VCG tool can be found See 
+The following sections are part of a hypothesis. No tests have been completed yet, so there are currently no test results.
 
-\subsection{Possible Improvements}
+
+\subsection{Proposed changes to HAFA}
 \begin{description}
-\item[configuration file select] One possible improvement that would make the backup feature better would be the addition of a multi-select backup. This would allow the user to select which configuration files they would like to backup. 
-\item[progress bar] Another improvement which may prove to be useful would be the addition of a progress bar when backing up the local files. Even though the process is very fast, sometimes a visual indicator is still nice to have, especially if the files grow in size as time goes on.
+\item[Use DBSCAN on first pass.] Use DBSCAN to cluster highly dense areas within each layer. This will enable DBSCAN to cluster nodes in highly dense areas very fast, then cluster the outliers based on the Agglomerative Complete Linkage Hierarchical Clustering method. The use of DBSCAN could be based on several factors, including but not limited to: distance, MIPS, power. For example, the radius of the circle for the Core Point~\ref{fig:pseudocode} qualification could increase for a specific node if they are lacking certain resources and require more for specific load balancing activities.
 \end{description}
+
+\subsection{Potential Problems and Solutions}
+This section covers possible issues that will arise during testing, as well as possible solutions.
+\begin{description}
+\item[DBSCAN Qualifications.] The use of DBSCAN as a first pass should only be used if it will increase the run time. Therefore, a potential check could be implemented to ensure that running DBSCAN will in fact help with the run time. For example, a city block that only has 10 devices which are spread out could have a longer run time if using the aforementioned method. However, if that same city block had 1000 devices that were tightly packed, the run time would be greatly reduced by using DBSCAN first. Because of this, a qualification algorithm could be implemented to check if DBSCAN would be beneficial or not. Obviously the run time of this check would also have to be low enough to make it worth it. Otherwise, we would just blindly run the DBSCAN every time, which could still be the better option. An example qualification algorithm could be:
+\begin{verbatim}
+if point_density > threshold:
+ return DBSCAN + Agglomerative
+else:
+ return Agglomerative
+\end{verbatim}
+\end{description}
+
+\subsection{Computational Complexity of using DBSCAN within HAFA}
+
+\begin{description}
+\item[Best-case] Best case complexity should be $O (n log n)$ vs. $O(n^3)$ of HAFA.
+\item[Average-case] Average case complexity should be better.
+\item[Worst-case] Worst-case complexity should remain the same as HAFA, $O(n^3)$.
+
+\end{description}
+
+
+
+
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.45\textwidth]{backup}
-\caption{\label{fig:backup}Location of the new "Backup Definitions" button.}
+\includegraphics[width=0.45\textwidth]{pseudocode}
+\caption{\label{fig:pseudocode}DBSCAN Pseudocode.}
 \end{figure}
 
 \bibliographystyle{plain}
