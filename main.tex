@@ -35,8 +35,10 @@ Last Edit: \today
 %-------------------------------------------------------------------------------
 \begin{abstract}
 %-------------------------------------------------------------------------------
-When given a finite resource such as the space on planet Earth, and add a rapidly increasing population (there is approximately a net gain of one new person on the planet Earth every 31 seconds\footnote{\url{https://www.census.gov/popclock}}), there will become a need to group the growing number of devices within HAFA~\cite{10.1145/3229710.3229740} in a much faster method. This is where adding the DBSCAN~\cite{10.5555/3001460.3001507} method into HAFA as an initial pass would greatly reduce the overall average case run time.
+Our population is increasing rapidly(there is approximately a net gain of one new person on the planet Earth every 31 seconds\footnote{\url{https://www.census.gov/popclock}}), and the need to manage all of those new devices coming online will grow with it. Thankfully, HAFA~\cite{10.1145/3229710.3229740} was designed to handle such situations. However, when given a finite resource such as the space on planet Earth, and combine that with a growing population, clustering based on density will be very important. This paper will cover the implementation of other clustering algorithms, such as the DBSCAN~\cite{10.5555/3001460.3001507} method, into the HAFA architecture.
 
+I am currently exploring the idea of:
+As an initial pass would greatly reduce the overall average case run time.
 \end{abstract}
 
 
@@ -60,6 +62,8 @@ else:
  return .2
 \end{verbatim}
  The return values need work...perhaps a loop to keep increasing until the average MIPS is no longer below the threshold. This would require a different idea. This would involve a loop that checks the current MIPS within the cluster as DBSCAN runs, then if they do not meet the threshold, the Eps could increase in size to acquire more nodes. Another idea: have the MIPS per cluster be a new variable within HAFA. Then, as DBSCAN runs, it will check if it has hit that threshold, if yes, then the MinPts and Eps could drastically change so that the current clustering process ends, thus forming a new cluster.
+ 
+ \item[Using Great-circle distance vs. Euclidean.] Because earth is mostly spherical, if using a distance metric for geographic data, it would make more sense to use Great-circle distance.
 \end{description}
 
 \subsection{Potential Problems and Solutions}
