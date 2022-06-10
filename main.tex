@@ -63,6 +63,12 @@ else:
 \end{verbatim}
  The return values need work...perhaps a loop to keep increasing until the average MIPS is no longer below the threshold. This would require a different idea. This would involve a loop that checks the current MIPS within the cluster as DBSCAN runs, then if they do not meet the threshold, the Eps could increase in size to acquire more nodes. Another idea: have the MIPS per cluster be a new variable within HAFA. Then, as DBSCAN runs, it will check if it has hit that threshold, if yes, then the MinPts and Eps could drastically change so that the current clustering process ends, thus forming a new cluster.
  
+ Should we use total MIPS instead for the threshold? This might be less complex than average, and total MIPS should be a fine metric anyway if we are clustering the nodes for load balancing.
+ 
+ ****Will need to alter the DBSCAN algo...I think the best solution would be to begin the clustering, if cluster is complete AND the threshold is not met, then the Eps could increase to find more resources...
+ 
+For now I am going with taking an average of the layer, 
+ 
  \item[Using Great-circle distance vs. Euclidean.] Because earth is mostly spherical, if using a distance metric for geographic data, it would make more sense to use Great-circle distance.
 \end{description}
 
