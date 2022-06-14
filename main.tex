@@ -41,9 +41,13 @@ Propagation time = Distance / propagation speed
 \end{verbatim}
 If Propagation Time will not work in DMDBSCAN, perhaps the Distance could be extracted and used?
  
-\subsection{Using Great-circle distance vs. Euclidean.}Because earth is mostly spherical, if using a distance metric for geographic data, would it would make more sense to use Great-circle distance?
+\subsection{Using Great-circle distance vs. Euclidean.}Because earth is mostly spherical, if using a distance metric for geographic data, would it would make more sense to use Great-circle distance? \todo{need to check if this has been implemented in pFogSim or published already.}
 
-\subsection{Novel? Idea 1.} One potential idea for clustering based on MIPS would be to have a threshold of total MIPS for each cluster, which would prevent the total cluster MIPS from going over. This would enable a check to see the approximate amount of needed clusters that would be needed to meet the threshold standards set by the domain expert; then k-means clustering could be used, which is faster than DBSCAN.
+\todo{come up with novel algorithm that combines the below ideas. i.e. combines MIPS with propagation time}
+
+\subsection{Idea 1.} One potential idea for clustering based on MIPS would be to have a threshold of total MIPS for each cluster, which would prevent the total cluster MIPS from going over. This would enable a check to see the approximate amount of needed clusters that would be needed to meet the threshold standards set by the domain expert; then k-means clustering could be used, which is faster than DBSCAN. \todo{put pseudocode from my python tool}
+
+\subsection{Idea 2.} \todo{Research node navigation i.e. circumvent buildings or down nodes. Look at Zoom drawing for ideas.}
 
 \section{Potential Problems and Solutions}
 This section covers possible issues that will arise during testing, as well as possible solutions.
